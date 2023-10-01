@@ -12,6 +12,9 @@ public class Customer extends AggregateRoot<CustomerId> {
         this.name = name;
         this.phone = phone;
     }
+    public Customer() {
+
+    }
 
     public String getName() {
         return name;

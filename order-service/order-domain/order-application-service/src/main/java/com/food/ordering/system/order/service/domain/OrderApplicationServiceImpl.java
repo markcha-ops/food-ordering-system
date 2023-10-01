@@ -11,24 +11,20 @@ import org.springframework.validation.annotation.Validated;
 
 @Slf4j
 @Validated
-@Service
+@Service("orderApplicationServiceImpl")
 public class OrderApplicationServiceImpl implements OrderApplicationService {
     private final OrderCreateCommandHandler orderCreateCommandHandler;
     private final OrderTrackCammandHandler orderTrackCommandHandler;
-
     public OrderApplicationServiceImpl(OrderCreateCommandHandler orderCreateCommandHandler, OrderTrackCammandHandler orderTrackCommandHandler) {
         this.orderCreateCommandHandler = orderCreateCommandHandler;
         this.orderTrackCommandHandler = orderTrackCommandHandler;
     }
-
     @Override
-    public CreateOrderResponse createOrder(CreateOrderCommand command) {
-
-        return null;
+    public CreateOrderResponse createOrder(CreateOrderCommand createOrderCommand) {
+        return orderCreateCommandHandler.createOrder(createOrderCommand);
     }
-
     @Override
     public TrackOrderResponse trackOrder(TrackOrderQuery trackOrderQuery) {
-        return null;
+        return orderTrackCommandHandler.trackOrder(trackOrderQuery);
     }
 }

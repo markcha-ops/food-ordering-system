@@ -7,6 +7,7 @@ import com.bood.ordering.system.domain.valueobject.RestaurantId;
 import com.food.ordering.system.order.service.domain.dto.create.CreateOrderCommand;
 import com.food.ordering.system.order.service.domain.dto.create.CreateOrderResponse;
 import com.food.ordering.system.order.service.domain.dto.create.OrderAddress;
+import com.food.ordering.system.order.service.domain.dto.track.TrackOrderResponse;
 import com.food.ordering.system.order.service.domain.enriry.Order;
 import com.food.ordering.system.order.service.domain.enriry.OrderItem;
 import com.food.ordering.system.order.service.domain.enriry.Product;
@@ -38,10 +39,11 @@ public class OrderDataMapper {
                 .items(orderItemsToOrderItemEntities(createOrderCommand.getItems()))
                 .build();
     }
-    public CreateOrderResponse orderToCreateOrderResponse(Order order) {
+    public CreateOrderResponse orderToCreateOrderResponse(Order order, String message) {
         return CreateOrderResponse.builder()
                 .orderTrackingId(order.getTrackingId().getValue())
                 .orderStatus(order.getOrderStatus())
+                .message(message)
                 .build();
     }
     private List<OrderItem> orderItemsToOrderItemEntities(
@@ -62,5 +64,12 @@ public class OrderDataMapper {
                 address.getPostalCode(),
                 address.getCity()
         );
+    }
+    public TrackOrderResponse orderToTrackOrderResponse(Order order) {
+        return TrackOrderResponse.builder()
+                .orderTrackingId(order.getTrackingId().getValue())
+                .orderStatus(order.getOrderStatus())
+                .fauilureMessages(order.getFailureMessages())
+                .build();
     }
 }
