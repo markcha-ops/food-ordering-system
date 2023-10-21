@@ -19,6 +19,10 @@
             <groupId>com.food.ordering.system</groupId>
             <artifactId>common-domain</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

@@ -29,6 +29,14 @@ public class Order extends AggregateRoot<OrderId> {
         orderStatus = OrderStatus.PENDING;
         initializeOrderItemns();
     }
+
+    private void initializeOrderItemns() {
+        long itemId = 1L;
+        for (OrderItem orderItem: items) {
+            orderItem.initializeOrderItem(super.getId(),
+                    new OrderItemId(itemId++));
+        }
+    }
     public void validateOrder() {
        validateInitialOrder();
        validateTotalPrice();
@@ -112,13 +120,7 @@ public class Order extends AggregateRoot<OrderId> {
         }
     }
 
-    private void initializeOrderItemns() {
-        long itemId = 1L;
-        for (OrderItem orderItem: items) {
-            orderItem.initializeOrderItem(super.getId(),
-                    new OrderItemId(itemId++));
-        }
-    }
+
 
     private Order(Builder builder) {
         super.setId(builder.id);
